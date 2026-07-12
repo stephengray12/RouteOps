@@ -12,6 +12,17 @@ export default defineConfig({
     vueJsx(),
     vueDevTools(),
   ],
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+    proxy: {
+      '/WeatherForecast': {
+        target: 'http://localhost:5164',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
